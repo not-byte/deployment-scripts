@@ -1,8 +1,8 @@
 #!/bin/bash
 
-docker pull ghcr.io/$1:main
+docker pull ghcr.io/$1:latest
 
-image_id=$(docker images --format "{{.ID}}" ghcr.io/$1:main)
+image_id=$(docker images --format "{{.ID}}" ghcr.io/$1:latest)
 
 docker container prune --force
 docker image prune --force
