@@ -1,6 +1,6 @@
 #!/bin/bash
 
-image="ghcr.io/"$repository":latest"
+image="ghcr.io/"$1":latest"
 name=$2
 port=$3
 
