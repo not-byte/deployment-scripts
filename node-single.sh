@@ -12,4 +12,4 @@ docker image prune --force
 docker container stop $name || true
 docker container rm $name || true
 
-docker run -dp 127.0.0.1:$port:3000 --name $name $image
+docker run --detach --name $name --publish 127.0.0.1:$port:3000 --restart always $image
