@@ -4,6 +4,7 @@
 
 image="cockroachdb/cockroach"
 subnet="notroach"
+port=60009
 
 if [ "$1" ];
 then
@@ -19,13 +20,13 @@ docker network create -d bridge "${subnet}" &>/dev/null
 docker container prune --force &>/dev/null
 docker image prune --force &>/dev/null
 
-joined="${subnet}-1:60009"
+joined="${subnet}-1:${port}"
 
 for ((roach=1; roach<=clusters; roach++));
 do
   if [ "${roach}" -ne 1 ];
   then
-    joined="${joined},${subnet}-${roach}:60009"
+    joined="${joined},${subnet}-${roach}:${port}"
   fi
 
   name="${subnet}-${roach}"
@@ -46,9 +47,9 @@ do
     --restart always                             \
     "$image"                                     \
     start                                        \
-    --advertise-addr="${name}:60009"             \
+    --advertise-addr="${name}:${port}"           \
     --http-addr="${name}:808${roach}"            \
-    --listen-addr="${name}:60009"                \
+    --listen-addr="${name}:${port}"              \
     --sql-addr="${name}:2625${roach}"            \
     --insecure                                   \
     --join="${joined}" &>/dev/null
@@ -56,6 +57,6 @@ done
 
 docker exec                     \
   -it "${subnet}-1" ./cockroach \
-  --host="0.0.0.0:60009"        \
+  --host="${subnet}:${port}"    \
   init                          \
   --insecure
