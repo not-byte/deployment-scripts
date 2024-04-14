@@ -19,9 +19,9 @@ docker network create -d bridge "${subnet}" &>/dev/null
 docker container prune --force &>/dev/null
 docker image prune --force &>/dev/null
 
-joined="${subnet}-${sub}:60009"
+joined="${subnet}-1:60009"
 
-for ((sub=clusters; sub>=1; sub--));
+for ((sub=0; sub>clusters; sub++));
 do
   joined="${joined},${subnet}-${sub}:60009"
 done
