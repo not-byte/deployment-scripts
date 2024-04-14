@@ -29,6 +29,12 @@ done
 for ((roach=1; roach<=clusters; roach++));
 do
   name="${subnet}-${roach}"
+  if [ "${roach}" -eq 1 ];
+  then
+      port="60009"
+  else
+      port="2625${roach}"
+  fi
 
   docker stop "${name}" &>/dev/null
   docker rm "${name}" &>/dev/null
@@ -41,7 +47,7 @@ do
     --hostname="${subnet}-${roach}"               \
     --net="${subnet}"                             \
     --publish "127.0.0.1:808${roach}:808${roach}" \
-    --publish "0.0.0.0:2625${roach}:2625${roach}" \
+    --publish "0.0.0.0:${port}:2625${roach}"      \
     --volume "${name}:/cockroach/cockroach-data"  \
     --restart always                              \
     "$image"                                      \
