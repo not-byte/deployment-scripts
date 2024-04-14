@@ -4,6 +4,7 @@
 
 image="cockroachdb/cockroach"
 subnet="notroach"
+controller="${subnet}-1"
 port=60009
 
 if [ "$1" ];
@@ -20,7 +21,7 @@ docker network create -d bridge "${subnet}" &>/dev/null
 docker container prune --force &>/dev/null
 docker image prune --force &>/dev/null
 
-joined="${subnet}-1:${port}"
+joined="${controller}:${port}"
 
 for ((roach=1; roach<=clusters; roach++));
 do
@@ -55,8 +56,8 @@ do
     --join="${joined}" &>/dev/null
 done
 
-docker exec                     \
-  -it "${subnet}-1" ./cockroach \
-  --host="${subnet}:${port}"    \
-  init                          \
+docker exec                       \
+  -it "${controller}" ./cockroach \
+  --host="${controller}:${port}"  \
+  init                            \
   --insecure
