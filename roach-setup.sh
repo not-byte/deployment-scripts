@@ -20,7 +20,6 @@ done
 for ((roach=1; roach<=clusters; roach++));
 do
   name="${subnet}-${roach}"
-  echo "${name}:2625${roach}"
 
   docker stop "${name}" &>/dev/null
   docker rm "${name}" &>/dev/null
