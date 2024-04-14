@@ -21,6 +21,12 @@ for ((roach=1; roach<=clusters; roach++));
 do
   name="${subnet}-${roach}"
   echo "${name}:2625${roach}"
+
+  docker stop "${name}"
+  docker rm "${name}"
+
+  docker volume rm "${name}"
+
   docker volume create "${name}"
   docker run                                     \
     --detach                                     \
