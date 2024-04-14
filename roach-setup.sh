@@ -31,7 +31,7 @@ do
   docker run                                     \
     --detach                                     \
     --name "${name}"                             \
-    --hostname="${subnet}"                       \
+    --hostname="${subnet}-${roach}"              \
     --net="${subnet}"                            \
     --publish "2625${roach}:2625${roach}"        \
     --volume "${name}:/cockroach/cockroach-data" \
