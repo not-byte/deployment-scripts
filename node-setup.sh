@@ -21,4 +21,4 @@ docker run                         \
   --name "${name}"                   \
   --publish 127.0.0.1:"${port}":3000 \
   --restart always                 \
-  "${image}"
+  "${image}" &>/dev/null

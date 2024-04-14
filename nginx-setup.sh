@@ -21,4 +21,4 @@ docker run                                      \
   --publish 0.0.0.0:"${ports[0]}":"${ports[0]}" \
   --publish 0.0.0.0:"${ports[1]}":"${ports[1]}" \
   --restart always                              \
-  "$image"
+  "$image" &>/dev/null

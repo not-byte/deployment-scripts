@@ -4,7 +4,13 @@
 
 image="cockroachdb/cockroach"
 subnet="notroach"
-clusters=$1
+
+if [ "$1" ];
+then
+    clusters=$1
+else
+    clusters=3
+fi
 
 docker pull "${image}" &>/dev/null
 
@@ -23,8 +29,6 @@ done
 for ((roach=1; roach<=clusters; roach++));
 do
   name="${subnet}-${roach}"
-
-  echo "${name}"
 
   docker stop "${name}" &>/dev/null
   docker rm "${name}" &>/dev/null
@@ -47,7 +51,7 @@ do
     --listen-addr="${name}:60009"                 \
     --sql-addr="${name}:2625${roach}"             \
     --insecure                                    \
-    --join="${joined}"
+    --join="${joined}" &>/dev/null
 done
 
 docker exec                               \
