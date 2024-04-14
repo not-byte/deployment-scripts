@@ -3,9 +3,7 @@ This repository contains our deployment scripts for a Linux system
 
 Download script
 
-`curl -sl https://raw.githubusercontent.com/not-byte/deployment-scripts/main/basic-setup.sh -o ~/basic-setup.sh`
-
-`sudo chmod u+xr ~/basic.setup.sh`
+`curl -sl https://raw.githubusercontent.com/not-byte/deployment-scripts/main/basic-setup.sh -o ~/basic-setup.sh && sudo chmod u+xr ~/basic-setup.sh`
 
 Login
 

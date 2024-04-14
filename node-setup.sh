@@ -2,7 +2,7 @@
 
 source utils/repo-check.sh
 
-# Run a Node application
+# Run a containerized Node
 
 image="ghcr.io/$1:latest"
 name=$2

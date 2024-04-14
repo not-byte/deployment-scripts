@@ -14,7 +14,7 @@ sudo apt upgrade -y
 
 hasDocker=$(sudo docker -v)
 
-if [ "${hasDocker}" ];
+if [ ! "${hasDocker}" ];
 then
   curl -sSL https://get.docker.com/ | CHANNEL=stable bash
 fi

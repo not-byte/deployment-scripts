@@ -2,7 +2,7 @@
 
 source utils/repo-check.sh
 
-# Setup NGINX in Docker
+# Run a containerized NGINX
 
 ports=("$@")
 
