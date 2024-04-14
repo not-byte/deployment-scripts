@@ -35,23 +35,23 @@ do
 
   docker volume create "${name}" &>/dev/null
 
-  docker run                                      \
-    --detach                                      \
-    --name "${name}"                              \
-    --hostname="${subnet}-${roach}"               \
-    --net="${subnet}"                             \
-    --port "2625${roach}:2625${roach}"            \
-    --port "808${roach}:808${roach}"              \
-    --volume "${name}:/cockroach/cockroach-data"  \
-    --restart always                              \
-    "$image"                                      \
-    start                                         \
-    --advertise-addr="${name}:60009"              \
-    --http-addr="${name}:808${roach}"             \
-    --listen-addr="${name}:60009"                 \
-    --sql-addr="${name}:2625${roach}"             \
-    --insecure                                    \
-    --join="${joined}"
+  docker run                                     \
+    --detach                                     \
+    --name "${name}"                             \
+    --hostname="${subnet}-${roach}"              \
+    --net="${subnet}"                            \
+    --publish "2625${roach}:2625${roach}"        \
+    --publish "808${roach}:808${roach}"          \
+    --volume "${name}:/cockroach/cockroach-data" \
+    --restart always                             \
+    "$image"                                     \
+    start                                        \
+    --advertise-addr="${name}:60009"             \
+    --http-addr="${name}:808${roach}"            \
+    --listen-addr="${name}:60009"                \
+    --sql-addr="${name}:2625${roach}"            \
+    --insecure                                   \
+    --join="${joined}" &>/dev/null
 done
 
 echo "${joined}"
@@ -60,4 +60,4 @@ docker exec                     \
   -it "${subnet}-1" ./cockroach \
   --host="0.0.0.0:60009"        \
   init                          \
-  --insecure
+  --insecure &>/dev/null
