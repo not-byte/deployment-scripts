@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source utils/repo-check.sh
+
 # Install necessery packages and setup
 
 username="$USER"
@@ -10,7 +12,12 @@ sudo usermod -aG docker "$username"
 sudo apt update
 sudo apt upgrade -y
 
-curl -sSL https://get.docker.com/ | CHANNEL=stable bash
+hasDocker=$(sudo docker -v)
+
+if [ "${hasDocker}" ];
+then
+  curl -sSL https://get.docker.com/ | CHANNEL=stable bash
+fi
 
 sudo mkdir -p -m 755 /etc/apt/keyrings && wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null
 sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg

@@ -1,8 +1,12 @@
 #!/bin/bash
 
+source utils/repo-check.sh
+
 # Setup NGINX in Docker
 
-source port-check.sh
+ports=("$@")
+
+source utils/port-check.sh "${ports[0]}" "${ports[1]}"
 
 docker pull nginx
 
