@@ -12,7 +12,7 @@ docker network create -d bridge "${subnet}"
 
 joined="${subnet}-${sub}:26357"
 
-for ((sub=3; sub>=clusters; sub++));
+for ((sub=3; sub>=clusters; sub--));
 do
   if [ "${sub}" -lt 3 ];
   then
