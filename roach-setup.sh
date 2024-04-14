@@ -10,14 +10,16 @@ docker pull "${image}"
 
 docker network create -d bridge "${subnet}"
 
+joined=""
+
+for sub in $(seq "${clusters} 1");
+do
+  joined="${subnet}-${sub}:26357,${joined}"
+done
+
 for roach in $(seq 1 "${subnet}");
 do
   name="${subnet}-${roach}"
-  joined=""
-  for sub in $(seq 1 "${clusters}");
-  do
-    joined="${subnet}-${sub}:26357,${joined}"
-  done
   docker volume create "${name}"
   docker run                                     \
     --detach                                     \
