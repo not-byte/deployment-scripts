@@ -7,10 +7,13 @@ ports=(80 443)
 
 source utils/port-check.sh "${ports[0]}" "${ports[1]}"
 
-docker pull "$image"
+docker pull "$image" &>/dev/null
 
-docker container stop nginx &>/dev/null
-docker container rm nginx &>/dev/null
+docker prune --force
+docker image prune --force
+
+docker stop nginx &>/dev/null
+docker rm nginx &>/dev/null
 
 docker run                                      \
   --detach                                      \

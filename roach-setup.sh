@@ -6,9 +6,12 @@ image="cockroachdb/cockroach"
 subnet="notroach"
 clusters=$1
 
-docker pull "${image}"
+docker pull "${image}" &>/dev/null
 
-docker network create -d bridge "${subnet}"
+docker network create -d bridge "${subnet}" &>/dev/null
+
+docker prune --force
+docker image prune --force
 
 joined="${subnet}-${sub}:60009"
 

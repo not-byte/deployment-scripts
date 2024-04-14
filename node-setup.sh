@@ -8,13 +8,13 @@ port=$3
 
 source utils/port-check.sh "${port}"
 
-docker pull "${image}"
+docker pull "${image}" &>/dev/null
 
-docker container prune --force
+docker prune --force
 docker image prune --force
 
-docker container stop "${name}" || true
-docker container rm "${name}" || true
+docker stop "${name}" || true
+docker rm "${name}" || true
 
 docker run                         \
   --detach                         \
