@@ -29,7 +29,7 @@ done
 for ((roach=1; roach<=clusters; roach++));
 do
   name="${subnet}-${roach}"
-  if [ "${roach}" -eq 1 ];
+  if [ "${roach}" -eq 0 ];
   then
       port="60009"
   else
@@ -46,8 +46,8 @@ do
     --name "${name}"                              \
     --hostname="${subnet}-${roach}"               \
     --net="${subnet}"                             \
-    --publish "127.0.0.1:808${roach}:808${roach}" \
-    --publish "0.0.0.0:${port}:2625${roach}"      \
+    --port "2625${roach}:2625${roach}"            \
+    --port "808${roach}:808${roach}"            \
     --volume "${name}:/cockroach/cockroach-data"  \
     --restart always                              \
     "$image"                                      \
@@ -60,8 +60,8 @@ do
     --join="${joined}" &>/dev/null
 done
 
-docker exec                               \
-  -it "${subnet}-1" ./cockroach           \
-  --host="${subnet}-1:60009"              \
-  init                                    \
+docker exec                     \
+  -it "${subnet}-1" ./cockroach \
+  --host="0.0.0.0:60009"        \
+  init                          \
   --insecure
