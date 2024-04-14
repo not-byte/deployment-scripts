@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source utils/repo-check.sh
-
 # Run a containerized Node
 
 image="ghcr.io/$1:latest"

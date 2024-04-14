@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source utils/repo-check.sh
-
 # Run a containerized NGINX
 
 ports=(80 443)
