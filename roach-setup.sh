@@ -46,7 +46,8 @@ do
     --join="${joined}"
 done
 
-docker exec -it "${subnet}-1" ./cockroach \
+docker exec                               \
+  -it "${subnet}-1" ./cockroach           \
   --host="${subnet}-1:26357"              \
   init                                    \
   --insecure
