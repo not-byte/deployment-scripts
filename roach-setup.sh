@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# Run multiple-instance of Cockroach Database
+# Run n-instances of Cockroach Database
 
 image="cockroachdb/cockroach"
 subnet="notroach"
-clusters=3
+clusters=$1
 
 docker pull "${image}"
 
@@ -12,7 +12,7 @@ docker network create -d bridge "${subnet}"
 
 joined="${subnet}-${sub}:60009"
 
-for ((sub=clusters-1; sub>=0; sub--));
+for ((sub=clusters; sub>=1; sub--));
 do
   joined="${joined},${subnet}-${sub}:60009"
 done
@@ -22,10 +22,10 @@ do
   name="${subnet}-${roach}"
   echo "${name}:2625${roach}"
 
-  docker stop "${name}"
-  docker rm "${name}"
+  docker stop "${name}" &>/dev/null
+  docker rm "${name}" &>/dev/null
 
-  docker volume create "${name}"
+  docker volume create "${name}" &>/dev/null
 
   docker run                                      \
     --detach                                      \
