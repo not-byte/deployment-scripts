@@ -8,7 +8,7 @@ ports=("$@")
 
 source utils/port-check.sh "${ports[0]}" "${ports[1]}"
 
-docker pull nginx
+docker pull nginx/nginx:latest
 
 docker container stop nginx || true
 docker container rm nginx || true
@@ -19,4 +19,4 @@ docker run                                      \
   --publish 0.0.0.0:"${ports[0]}":"${ports[0]}" \
   --publish 0.0.0.0:"${ports[1]}":"${ports[1]}" \
   --restart always                              \
-  nginx
+  nginx/nginx:latest
