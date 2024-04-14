@@ -14,7 +14,7 @@ for roach in $(seq 1 "${subnet}");
 do
   name="${subnet}-${roach}"
   joined=""
-  for sub in $(seq 1 "${subnet}");
+  for sub in $(seq 1 "${clusters}");
   do
     joined="${subnet}-${sub}:26357,${joined}"
   done
