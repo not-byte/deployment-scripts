@@ -2,8 +2,8 @@
 
 # Run a containerized NGINX
 
-ports=(80 443)
 image="nginx:latest"
+ports=(80 443)
 
 source utils/port-check.sh "${ports[0]}" "${ports[1]}"
 
