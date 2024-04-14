@@ -21,7 +21,7 @@ docker image prune --force &>/dev/null
 
 joined="${subnet}-1:60009"
 
-for ((sub=0; sub>clusters; sub++));
+for ((sub=0; sub<clusters; sub++));
 do
   joined="${joined},${subnet}-${sub}:60009"
 done
