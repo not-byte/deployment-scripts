@@ -39,11 +39,11 @@ do
 
   docker run                                     \
     --detach                                     \
-    --name "${name}"                             \
+    --name="${name}"                             \
     --hostname="${subnet}-${roach}"              \
     --net="${subnet}"                            \
-    --publish "2625${roach}:2625${roach}"        \
-    --publish "808${roach}:808${roach}"          \
+    --publish="2625${roach}:2625${roach}"        \
+    --publish="808${roach}:808${roach}"          \
     --volume "${name}:/cockroach/cockroach-data" \
     --restart always                             \
     "$image"                                     \
