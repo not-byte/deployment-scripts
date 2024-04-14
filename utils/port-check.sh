@@ -2,12 +2,12 @@
 
 # Check if necessary ports are available
 
-isMapped="false"
 ports=("$@")
+isMapped="false"
 
 for port in "${ports[@]}";
 do
-  isMapped=$(sudo lsof -i TCP:"${port}")
+  isMapped=$(sudo lsof -u ^snap_daemon -i TCP:"${port}")
   if [ "${isMapped}" ];
   then
     echo "> Port ${port} is used!"
