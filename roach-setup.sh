@@ -52,8 +52,8 @@ do
     --http-addr="${name}:808${roach}"            \
     --listen-addr="${name}:${port}"              \
     --sql-addr="${name}:2625${roach}"            \
-    --insecure                                   \
-    --join="${joined}" &>/dev/null
+    --join="${joined}" &>/dev/null               \
+    --insecure
 done
 
 docker exec                       \
