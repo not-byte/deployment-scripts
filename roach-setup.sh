@@ -21,13 +21,13 @@ docker image prune --force &>/dev/null
 
 joined="${subnet}-1:60009"
 
-for ((sub=0; sub<clusters; sub++));
-do
-  joined="${joined},${subnet}-${sub}:60009"
-done
-
 for ((roach=1; roach<=clusters; roach++));
 do
+  if [ "${roach}" -ne 1 ];
+  then
+    joined="${joined},${subnet}-${roach}:60009"
+  fi
+
   name="${subnet}-${roach}"
 
   docker stop "${name}" &>/dev/null
