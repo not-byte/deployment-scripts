@@ -14,13 +14,11 @@ joined="${subnet}-${sub}:26357"
 
 for ((sub=clusters-1; sub>=0; sub--));
 do
-  then
-    joined="${joined},${subnet}-${sub}:26357"
-    echo "${joined}"
-  fi
+  joined="${joined},${subnet}-${sub}:26357"
+  echo "${joined}"
 done
 
-for ((roach=1; sub<=clusters; sub++));
+for ((roach=1; roach<=clusters; roach++));
 do
   name="${subnet}-${roach}"
   docker volume create "${name}"
