@@ -17,6 +17,7 @@ do
   if [ "${sub}" -lt 3 ];
   then
     joined="${joined},${subnet}-${sub}:26357"
+    echo "${joined}"
   fi
 done
 
