@@ -16,9 +16,9 @@ docker image prune --force &>/dev/null
 docker stop "${name}" || true
 docker rm "${name}" || true
 
-docker run                         \
-  --detach                         \
-  --name "${name}"                   \
-  --publish 127.0.0.1:"${port}":3000 \
-  --restart always                 \
+docker run                 \
+  --detach                 \
+  --name "${name}"         \
+  --publish "${port}":3000 \
+  --restart always         \
   "${image}" &>/dev/null
