@@ -12,12 +12,17 @@ docker network create -d bridge "${subnet}"
 
 joined=""
 
-for ((sub=1; sub<=clusters; sub++));
+for ((sub=3; sub>=clusters; sub++));
 do
-  joined="${subnet}-${sub}:26357,${joined}"
+  if [ "${sub}" == 3 ];
+  then
+    joined="${joined},${subnet}-${sub}:26357"
+  else
+    joined="${joined},${subnet}-${sub}:26357"
+  fi
 done
 
-for roach in $(seq 1 "${subnet}");
+for ((roach=1; sub<=clusters; sub++));
 do
   name="${subnet}-${roach}"
   docker volume create "${name}"
