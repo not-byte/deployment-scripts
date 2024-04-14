@@ -29,12 +29,6 @@ done
 for ((roach=1; roach<=clusters; roach++));
 do
   name="${subnet}-${roach}"
-  if [ "${roach}" -eq 0 ];
-  then
-      port="60009"
-  else
-      port="2625${roach}"
-  fi
 
   docker stop "${name}" &>/dev/null
   docker rm "${name}" &>/dev/null
