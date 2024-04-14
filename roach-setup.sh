@@ -10,14 +10,12 @@ docker pull "${image}"
 
 docker network create -d bridge "${subnet}"
 
-joined=""
+joined="${subnet}-${sub}:26357"
 
 for ((sub=3; sub>=clusters; sub++));
 do
-  if [ "${sub}" == 3 ];
+  if [ "${sub}" -lt 3 ];
   then
-    joined="${joined},${subnet}-${sub}:26357"
-  else
     joined="${joined},${subnet}-${sub}:26357"
   fi
 done
