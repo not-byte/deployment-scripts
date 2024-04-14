@@ -8,7 +8,7 @@ ports=(80 443)
 
 source utils/port-check.sh "${ports[0]}" "${ports[1]}"
 
-docker pull nginx/nginx:latest
+docker pull nginx:latest
 
 docker container stop nginx || true
 docker container rm nginx || true
