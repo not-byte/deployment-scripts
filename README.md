@@ -11,4 +11,4 @@ Login
 
 Pull deployment scripts
 
-`gh repo clone not-byte/deployment-script`
+`gh repo clone not-byte/deployment-scripts`
