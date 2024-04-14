@@ -1,15 +1,22 @@
 #!/bin/bash
 
-image="ghcr.io/"$1":latest"
+# Run a Node application
+
+image="ghcr.io/$1:latest"
 name=$2
 port=$3
 
-docker pull $image
+docker pull "$image"
 
 docker container prune --force
 docker image prune --force
 
-docker container stop $name || true
-docker container rm $name || true
+docker container stop "$name" || true
+docker container rm "$name" || true
 
-docker run --detach --name $name --publish 127.0.0.1:$port:3000 --restart always $image
+docker run                         \
+  --detach                         \
+  --name "$name"                   \
+  --publish 127.0.0.1:"$port":3000 \
+  --restart always                 \
+  "$image"
