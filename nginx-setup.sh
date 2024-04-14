@@ -9,8 +9,8 @@ source utils/port-check.sh "${ports[0]}" "${ports[1]}"
 
 docker pull "$image" &>/dev/null
 
-docker container prune --force
-docker image prune --force
+docker container prune --force &>/dev/null
+docker image prune --force &>/dev/null
 
 docker stop nginx &>/dev/null
 docker rm nginx &>/dev/null

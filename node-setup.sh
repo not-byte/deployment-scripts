@@ -10,8 +10,8 @@ source utils/port-check.sh "${port}"
 
 docker pull "${image}" &>/dev/null
 
-docker container prune --force
-docker image prune --force
+docker container prune --force &>/dev/null
+docker image prune --force &>/dev/null
 
 docker stop "${name}" || true
 docker rm "${name}" || true

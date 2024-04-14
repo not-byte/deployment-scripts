@@ -10,8 +10,8 @@ docker pull "${image}" &>/dev/null
 
 docker network create -d bridge "${subnet}" &>/dev/null
 
-docker container prune --force
-docker image prune --force
+docker container prune --force &>/dev/null
+docker image prune --force &>/dev/null
 
 joined="${subnet}-${sub}:60009"
 
