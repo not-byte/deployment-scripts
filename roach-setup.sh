@@ -54,6 +54,8 @@ do
     --join="${joined}"
 done
 
+echo "${joined}"
+
 docker exec                     \
   -it "${subnet}-1" ./cockroach \
   --host="0.0.0.0:60009"        \
