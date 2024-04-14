@@ -41,7 +41,7 @@ do
     --hostname="${subnet}-${roach}"               \
     --net="${subnet}"                             \
     --port "2625${roach}:2625${roach}"            \
-    --port "808${roach}:808${roach}"            \
+    --port "808${roach}:808${roach}"              \
     --volume "${name}:/cockroach/cockroach-data"  \
     --restart always                              \
     "$image"                                      \
@@ -51,7 +51,7 @@ do
     --listen-addr="${name}:60009"                 \
     --sql-addr="${name}:2625${roach}"             \
     --insecure                                    \
-    --join="${joined}" &>/dev/null
+    --join="${joined}"
 done
 
 docker exec                     \
