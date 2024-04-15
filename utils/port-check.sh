@@ -24,5 +24,5 @@ then
   echo "> Stop services using necessary ports!"
   exit 1
 else
-  sudo firewall-cmd --reload
+  sudo firewall-cmd --reload &>/dev/null
 fi

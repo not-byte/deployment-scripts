@@ -48,7 +48,7 @@ docker run                                           \
   --listen-addr="${controller}:26357"                \
   --sql-addr="${controller}:26257"                   \
   --join="${joined}"                                 \
-  --insecure
+  --insecure &>/dev/null
 
 for ((roach=2; roach<=clusters; roach++)); do
   name="${subnet}-${roach}"
@@ -72,7 +72,7 @@ for ((roach=2; roach<=clusters; roach++)); do
     --listen-addr="${name}:26357"                \
     --sql-addr="${name}:${sql}"                  \
     --join="${joined}"                           \
-    --insecure
+    --insecure &>/dev/null
 done
 
 docker exec                           \
