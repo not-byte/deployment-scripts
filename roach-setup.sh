@@ -53,9 +53,9 @@ docker run                                           \
   --restart always                                   \
   "$image"                                           \
   start                                              \
-  --advertise-addr="${name}:${ports[0]}"             \
+  --advertise-addr="${controller}:${ports[0]}"       \
   --http-addr="${controller}:${ports[1]}"            \
-  --listen-addr="${name}:${ports[0]}"                \
+  --listen-addr="${controller}:${ports[0]}"          \
   --sql-addr="${controller}:${ports[2]}"             \
   --join="${joined}"                                 \
   --insecure &>/dev/null
@@ -70,19 +70,19 @@ do
 
   docker volume create "${name}" &>/dev/null
 
-  docker run                                           \
-    --detach                                           \
-    --name "${name}"                                   \
-    --hostname "${subnet}-${roach}"                    \
-    --net "${subnet}"                                  \
-    --volume "${name}:/cockroach/cockroach-data"       \
-    --restart always                                   \
-    "$image"                                           \
-    start                                              \
-    --advertise-addr="${name}:${ports[0]}"             \
-    --listen-addr="${name}:${ports[0]}"                \
-    --sql-addr="${controller}:${sql}" \
-    --join="${joined}"                                 \
+  docker run                                     \
+    --detach                                     \
+    --name "${name}"                             \
+    --hostname "${subnet}-${roach}"              \
+    --net "${subnet}"                            \
+    --volume "${name}:/cockroach/cockroach-data" \
+    --restart always                             \
+    "$image"                                     \
+    start                                        \
+    --advertise-addr="${name}:${ports[0]}"       \
+    --listen-addr="${name}:${ports[0]}"          \
+    --sql-addr="${name}:${sql}"                  \
+    --join="${joined}"                           \
     --insecure &>/dev/null
 done
 
