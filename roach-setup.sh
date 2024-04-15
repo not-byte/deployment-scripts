@@ -37,14 +37,14 @@ docker run                                           \
   --name "${controller}"                             \
   --hostname "${controller}"                         \
   --net "${subnet}"                                  \
-  --publish "60008:8081}"                            \
+  --publish "60008:8081"                            \
   --publish "60009:26257"                            \
   --volume "${controller}:/cockroach/cockroach-data" \
   --restart always                                   \
   "$image"                                           \
   start                                              \
   --advertise-addr="${controller}:26357"             \
-  --http-addr="${controller}:8081}"                  \
+  --http-addr="${controller}:8081"                  \
   --listen-addr="${controller}:26357"                \
   --sql-addr="${controller}:26257"                   \
   --join="${joined}"                                 \
