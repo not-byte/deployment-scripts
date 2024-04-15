@@ -14,7 +14,7 @@ subnet="notroach"
 controller="${subnet}-1"
 ports=(26357 8081 26257 60008 $port)
 
-source utils/port-check.sh "${$port}"
+source utils/port-check.sh "${port}"
 
 if [ "$1" ];
 then
