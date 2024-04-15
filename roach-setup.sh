@@ -21,6 +21,8 @@ else
   ports[4]=60009
 fi
 
+echo ${ports[*]}
+
 source utils/port-check.sh "${ports[4]}"
 
 docker pull "${image}" &>/dev/null
