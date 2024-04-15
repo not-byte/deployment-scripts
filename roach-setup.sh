@@ -21,13 +21,11 @@ docker network create -d bridge "${subnet}" &>/dev/null
 docker container prune --force &>/dev/null
 docker image prune --force &>/dev/null
 
-joined="${controller}:${ports[2]}"
+joined="${controller}:${ports[0]}"
 
 for ((roach=2; roach<=clusters; roach++));
 do
-  then
-    joined="${joined},${subnet}-${roach}:${ports[2]}"
-  fi
+    joined="${joined},${subnet}-${roach}:${ports[0]}"
 done
 
 docker stop "${controller}" &>/dev/null
