@@ -42,7 +42,11 @@ docker rm "${controller}" &>/dev/null
 
 docker volume create "${controller}" &>/dev/null
 
-echo ${ports}
+echo ${ports[0]}
+echo ${ports[1]}
+echo ${ports[2]}
+echo ${ports[3]}
+echo ${ports[4]}
 
 docker run                                           \
   --detach                                           \
