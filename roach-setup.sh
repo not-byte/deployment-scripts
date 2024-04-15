@@ -21,8 +21,6 @@ else
   ports[4]=60009
 fi
 
-echo ${ports[*]}
-
 source utils/port-check.sh "${ports[4]}"
 
 docker pull "${image}" &>/dev/null
@@ -43,6 +41,9 @@ docker stop "${controller}" &>/dev/null
 docker rm "${controller}" &>/dev/null
 
 docker volume create "${controller}" &>/dev/null
+
+echo "${ports[3]}:${ports[1]}"
+echo "${ports[4]}:${ports[2]}"
 
 docker run                                           \
   --detach                                           \
