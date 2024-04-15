@@ -54,7 +54,7 @@ docker run                                           \
 for ((roach=2; roach<=clusters; roach++));
 do
   name="${subnet}-${roach}"
-  sql=ports[2] + roach - 1
+  sql="$((ports[2]+roach-1))"
 
   docker stop "${name}" &>/dev/null
   docker rm "${name}" &>/dev/null
