@@ -2,10 +2,19 @@
 
 # Run n-instances of Cockroach Database
 
+if [ "$2" ];
+then
+    port=$1
+else
+    port=60009
+fi
+
 image="cockroachdb/cockroach"
 subnet="notroach"
 controller="${subnet}-1"
-ports=(26357 8081 26257 60008 60009)
+ports=(26357 8081 26257 60008 $port)
+
+source utils/port-check.sh "${$port}"
 
 if [ "$1" ];
 then
@@ -54,7 +63,7 @@ docker run                                           \
 for ((roach=2; roach<=clusters; roach++));
 do
   name="${subnet}-${roach}"
-  sql=ports[2] + roach - 1
+  sql="$((ports[2]+roach-1))"
 
   docker stop "${name}" &>/dev/null
   docker rm "${name}" &>/dev/null
