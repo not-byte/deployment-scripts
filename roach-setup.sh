@@ -5,7 +5,6 @@
 image="cockroachdb/cockroach"
 subnet="not-roach"
 controller="${subnet}-1"
-ports=(26357 8081 26257 60008)
 
 if [ "$1" ]; then
   clusters=$1
@@ -13,13 +12,7 @@ else
   clusters=3
 fi
 
-if [ "$2" ]; then
-  ports[3]=$2
-else
-  ports[3]=60009
-fi
-
-source utils/port-check.sh ${ports[3]}
+source utils/port-check.sh 60008
 
 docker pull "${image}" &>/dev/null
 
@@ -28,10 +21,10 @@ docker network create -d bridge "${subnet}" &>/dev/null
 docker container prune --force &>/dev/null
 docker image prune --force &>/dev/null
 
-joined="${controller}:${ports[0]}"
+joined="${controller}:26357"
 
 for ((roach=2; roach<=clusters; roach++)); do
-  joined="${joined},${subnet}-${roach}:${ports[0]}"
+  joined="${joined},${subnet}-${roach}:26357"
 done
 
 docker stop "${controller}" &>/dev/null
@@ -44,22 +37,22 @@ docker run                                           \
   --name "${controller}"                             \
   --hostname "${controller}"                         \
   --net "${subnet}"                                  \
-  --publish "${ports[3]}:${ports[1]}"               \
-  --publish "${ports[4]}:${ports[2]}"               \
+  --publish "60008:8081}"                            \
+  --publish "60009:26257"                            \
   --volume "${controller}:/cockroach/cockroach-data" \
   --restart always                                   \
   "$image"                                           \
   start                                              \
-  --advertise-addr="${controller}:${ports[0]}"      \
-  --http-addr="${controller}:${ports[1]}"           \
-  --listen-addr="${controller}:${ports[0]}"         \
-  --sql-addr="${controller}:${ports[2]}"            \
+  --advertise-addr="${controller}:26357"             \
+  --http-addr="${controller}:8081}"                  \
+  --listen-addr="${controller}:26357"                \
+  --sql-addr="${controller}:26257"                   \
   --join="${joined}"                                 \
   --insecure
 
 for ((roach=2; roach<=clusters; roach++)); do
   name="${subnet}-${roach}"
-  sql=$((ports[2]+roach-1))
+  sql=$((26257+roach-1))
 
   docker stop "${name}" &>/dev/null
   docker rm "${name}" &>/dev/null
@@ -75,8 +68,8 @@ for ((roach=2; roach<=clusters; roach++)); do
     --restart always                             \
     "$image"                                     \
     start                                        \
-    --advertise-addr="${name}:${ports[0]}"      \
-    --listen-addr="${name}:${ports[0]}"         \
+    --advertise-addr="${name}:26357"             \
+    --listen-addr="${name}:26357"                \
     --sql-addr="${name}:${sql}"                  \
     --join="${joined}"                           \
     --insecure
@@ -84,6 +77,6 @@ done
 
 docker exec                           \
   -it "${controller}" ./cockroach     \
-  --host="${controller}:${ports[0]}" \
+  --host="${controller}:26357" \
   init                                \
   --insecure
