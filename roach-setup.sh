@@ -43,15 +43,15 @@ do
     --hostname "${subnet}-${roach}"              \
     --net "${subnet}"                            \
     --publish "2625${roach}:2625${roach}"        \
-    --publish "808${roach}:808${roach}"          \
+    --publish "6000${roach+3}:6000${roach+3}"    \
     --volume "${name}:/cockroach/cockroach-data" \
     --restart always                             \
     "$image"                                     \
     start                                        \
     --advertise-addr="${name}:${port}"           \
-    --http-addr="${name}:808${roach}"            \
+    --http-addr="${name}:6000${roach+3}"         \
     --listen-addr="${name}:${port}"              \
-    --sql-addr="${name}:2625${roach}"            \
+    --sql-addr="${name}:6000${roach}"            \
     --join="${joined}"                           \
     --insecure &>/dev/null
 done
