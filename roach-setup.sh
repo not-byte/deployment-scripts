@@ -2,11 +2,18 @@
 
 # Run n-instances of Cockroach Database
 
+if [ "$1" ];
+then
+  clusters=$1
+else
+  clusters=3
+fi
+
 if [ "$2" ];
 then
-    port=$1
+  port=$2
 else
-    port=60009
+  port=60009
 fi
 
 image="cockroachdb/cockroach"
@@ -15,13 +22,6 @@ controller="${subnet}-1"
 ports=(26357 8081 26257 60008 $port)
 
 source utils/port-check.sh "${port}"
-
-if [ "$1" ];
-then
-  clusters=$1
-else
-  clusters=3
-fi
 
 docker pull "${image}" &>/dev/null
 
