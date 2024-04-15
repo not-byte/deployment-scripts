@@ -7,8 +7,6 @@ subnet="not-roach"
 controller="${subnet}-1"
 ports=(26357 8081 26257 60008)
 
-source utils/port-check.sh "${port}"
-
 if [ "$1" ];
 then
   clusters=$1
@@ -18,12 +16,12 @@ fi
 
 if [ "$2" ];
 then
-  port=$2
+  ports[4]=$2
 else
-  port=60009
+  ports[4]=60009
 fi
 
-ports+=$(port)
+source utils/port-check.sh "${ports[4]}"
 
 docker pull "${image}" &>/dev/null
 
@@ -43,12 +41,6 @@ docker stop "${controller}" &>/dev/null
 docker rm "${controller}" &>/dev/null
 
 docker volume create "${controller}" &>/dev/null
-
-echo ${ports[0]}
-echo ${ports[1]}
-echo ${ports[2]}
-echo ${ports[3]}
-echo ${ports[4]}
 
 docker run                                           \
   --detach                                           \
