@@ -42,7 +42,7 @@ do
     --name "${name}"                             \
     --hostname "${subnet}-${roach}"              \
     --net "${subnet}"                            \
-    --publish "2625${roach}:2625${roach}"        \
+    --publish "6000${roach}:6000${roach}"        \
     --publish "6000${roach+3}:6000${roach+3}"    \
     --volume "${name}:/cockroach/cockroach-data" \
     --restart always                             \
