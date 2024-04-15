@@ -58,7 +58,7 @@ docker run                                           \
   --listen-addr="${controller}:${ports[0]}"          \
   --sql-addr="${controller}:${ports[2]}"             \
   --join="${joined}"                                 \
-  --insecure &>/dev/null
+  --insecure
 
 for ((roach=2; roach<=clusters; roach++));
 do
@@ -83,7 +83,7 @@ do
     --listen-addr="${name}:${ports[0]}"          \
     --sql-addr="${name}:${sql}"                  \
     --join="${joined}"                           \
-    --insecure &>/dev/null
+    --insecure
 done
 
 docker exec                          \
