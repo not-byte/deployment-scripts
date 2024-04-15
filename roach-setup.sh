@@ -17,7 +17,7 @@ else
 fi
 
 image="cockroachdb/cockroach"
-subnet="notroach"
+subnet="not-roach"
 controller="${subnet}-1"
 ports=(26357 8081 26257 60008 $port)
 
@@ -41,6 +41,8 @@ docker stop "${controller}" &>/dev/null
 docker rm "${controller}" &>/dev/null
 
 docker volume create "${controller}" &>/dev/null
+
+echo ${ports}
 
 docker run                                           \
   --detach                                           \
