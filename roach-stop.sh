@@ -23,8 +23,6 @@ do
 
   docker stop "${name}" &>/dev/null
   docker rm "${name}" &>/dev/null
-
-  docker volume rm "${name}" &>/dev/null
 done
 
 docker network rm "${subnet}" &>/dev/null
