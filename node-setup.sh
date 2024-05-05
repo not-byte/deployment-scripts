@@ -6,8 +6,6 @@ image="ghcr.io/${1}:latest"
 name=$2
 port=$3
 
-source utils/port-check.sh "${port}"
-
 docker pull "${image}" &>/dev/null
 
 docker container prune --force &>/dev/null
