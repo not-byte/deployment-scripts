@@ -16,7 +16,8 @@ docker rm "${name}" || true
 
 docker run                 \
   --detach                 \
+  --restart always         \
+  --network nginx          \
   --name "${name}"         \
   --publish "${port}":3000 \
-  --restart always         \
   "${image}" &>/dev/null

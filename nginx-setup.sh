@@ -17,8 +17,9 @@ docker rm nginx &>/dev/null
 
 docker run                                                            \
   --name nginx                                                        \
-  --restart always                                                    \
   --detach                                                            \
+  --restart always                                                    \
+  --network nginx                                                     \
   --volume /etc/ssl:/etc/ssl                                          \
   --volume ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf \
   --publish 0.0.0.0:"${ports[0]}":"${ports[0]}"                       \
