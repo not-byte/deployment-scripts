@@ -15,13 +15,12 @@ docker image prune --force &>/dev/null
 docker stop nginx &>/dev/null
 docker rm nginx &>/dev/null
 
-docker run                                                                       \
-  --detach                                                                       \
-  --name nginx                                                                   \
-  --volume /etc/ssl:/etc/ssl                                                     \
-  --volume ~/deployment-scripts/nginx/sites-available:/etc/nginx/sites-available \
-  --volume ~/deployment-scripts/nginx/sites-enabled:/etc/nginx/sites-enabled     \
-  --publish "${ports[0]}":"${ports[0]}"                                          \
-  --publish "${ports[1]}":"${ports[1]}"                                          \
-  --restart always                                                               \
+docker run                                                            \
+  --name nginx                                                        \
+  --restart always                                                    \
+  --detach                                                            \
+  --volume /etc/ssl:/etc/ssl                                          \
+  --volume ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf \
+  --publish 0.0.0.0:"${ports[0]}":"${ports[0]}"                       \
+  --publish 0.0.0.0:"${ports[1]}":"${ports[1]}"                       \
   "$image" &>/dev/null
