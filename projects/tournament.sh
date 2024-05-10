@@ -48,8 +48,8 @@ name="tournament_app"
 
 docker pull "${image}" &>/dev/null
 
-docker stop "${name}" || true
-docker rm "${name}" || true
+docker stop "${name}" &>/dev/null
+docker rm "${name}" &>/dev/null
 
 docker run \
   --name "${name}" \
