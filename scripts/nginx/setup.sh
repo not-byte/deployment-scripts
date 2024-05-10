@@ -19,7 +19,7 @@ docker run \
   --detach \
   --restart always \
   --volume /etc/ssl:/etc/ssl \
-  --volume ./../../config/nginx/conf.d:/etc/nginx/conf.d \
+  --volume ./../../../config/nginx/conf.d:/etc/nginx/conf.d \
   --publish 0.0.0.0:"${ports[0]}":"${ports[0]}" \
   --publish 0.0.0.0:"${ports[1]}":"${ports[1]}" \
   "${image}" &>/dev/null
