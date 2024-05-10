@@ -5,8 +5,6 @@ docker image prune --force &>/dev/null
 
 # Run a containerized NGINX Webserver
 
-network="bridge"
-
 name="nginx"
 image="${name}:latest"
 ports=(80 443)
@@ -20,8 +18,6 @@ docker run \
   --name "${name}" \
   --detach \
   --restart always \
-  --network "${network}" \
-  --ip 172.168.0.2 \
   --volume /etc/ssl:/etc/ssl \
   --volume ./../../config/nginx/conf.d:/etc/nginx/conf.d \
   --publish 0.0.0.0:"${ports[0]}":"${ports[0]}" \
