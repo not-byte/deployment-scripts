@@ -34,7 +34,7 @@ docker run \
   --detach \
   --restart always \
   --network "${network}" \
-  --ip 20.0.0.2 \
+  --ip 20.0.0.254 \
   --volume /etc/ssl:/etc/ssl \
   --volume ./../config/nginx/conf.d:/etc/nginx/conf.d \
   --publish 0.0.0.0:"${ports[0]}":"${ports[0]}" \
@@ -54,11 +54,12 @@ docker pull "${image}" &>/dev/null
 docker stop "${name}" &>/dev/null
 docker rm "${name}" &>/dev/null
 
-docker run \
-  --name "${name}" \
-  --detach \
-  --restart always  \
-  --network "${network}" \
-  --ip 20.0.0.3 \
-  "${image}" &>/dev/null
+for ((id=1; id<=3; id++)); do
+  docker run \
+    --name "${name}-${id}" \
+    --detach \
+    --restart always  \
+    --network "${network}" \
+    --ip 20.0.0."$((id+1))" \
+    "${image}" &>/dev/null
 
