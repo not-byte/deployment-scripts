@@ -62,4 +62,4 @@ for ((id=1; id<=3; id++)); do
     --network "${network}" \
     --ip 20.0.0."$((id+1))" \
     "${image}" &>/dev/null
-
+done
