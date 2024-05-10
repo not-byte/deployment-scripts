@@ -32,6 +32,9 @@ docker run \
   --restart always \
   --network "web" \
   --ip 20.0.1.1 \
-  --network "${network}" \
-  --ip 21.0.0.2 \
   "${image}" &>/dev/null
+
+docker network connect \
+  --ip 21.0.0.2 \
+  "${network}" \
+  "${name}" &>/dev/null

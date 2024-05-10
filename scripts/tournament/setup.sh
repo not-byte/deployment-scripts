@@ -33,7 +33,10 @@ for ((id=1; id<=3; id++)); do
     --restart always \
     --network "web" \
     --ip 20.0.2."${id}" \
-    --network "${network}" \
-    --ip 22.0.0."$((id+1))" \
     "${image}" &>/dev/null
+
+  docker network connect \
+    --ip 22.0.0."$((id+1))" \
+    "${network}" \
+    "${name}" &>/dev/null
 done
