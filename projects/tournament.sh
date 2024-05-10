@@ -3,21 +3,21 @@
 
 network="tournament"
 
-docker network rm "${network}"
+docker network rm "${network}" &>/dev/null
 
 docker network create \
   --driver=bridge \
   --subnet=20.0.0.0/16 \
   --ip-range=20.0.0.0/24 \
   --gateway=20.0.0.1 \
-  "${network}"
+  "${network}" &>/dev/null
 
 # Run a containerized NGINX
 
 image="nginx:latest"
 ports=(80 443)
 
-source utils/port-check.sh "${ports[0]}" "${ports[1]}"
+source ../utils/port-check.sh "${ports[0]}" "${ports[1]}"
 
 docker pull "$image" &>/dev/null
 
