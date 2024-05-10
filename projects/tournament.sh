@@ -55,7 +55,7 @@ docker rm "${name}" &>/dev/null
 
 for ((id=1; id<=3; id++)); do
   docker run \
-    --name "${name}-${id}" \
+    --name "${name}_${id}" \
     --detach \
     --restart always \
     --network "${network}" \
