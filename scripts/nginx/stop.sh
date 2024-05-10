@@ -1,5 +1,6 @@
 #!/bin/bash
 
+docker network prune --force &>/dev/null
 docker container prune --force &>/dev/null
 docker image prune --force &>/dev/null
 
