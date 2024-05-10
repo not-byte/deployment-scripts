@@ -35,12 +35,12 @@ docker volume create "${controller}" &>/dev/null
 docker run                                           \
   --detach                                           \
   --name "${controller}"                             \
+  --restart always                                   \
   --hostname "${controller}"                         \
   --net "${subnet}"                                  \
   --publish "60008:8081"                            \
   --publish "60009:26257"                            \
   --volume "${controller}:/cockroach/cockroach-data" \
-  --restart always                                   \
   "$image"                                           \
   start                                              \
   --advertise-addr="${controller}:26357"             \
@@ -60,12 +60,12 @@ for ((roach=2; roach<=clusters; roach++)); do
   docker volume create "${name}" &>/dev/null
 
   docker run                                     \
-    --detach                                     \
     --name "${name}"                             \
+    --detach                                     \
+    --restart always                             \
     --hostname "${subnet}-${roach}"              \
     --net "${subnet}"                            \
     --volume "${name}:/cockroach/cockroach-data" \
-    --restart always                             \
     "$image"                                     \
     start                                        \
     --advertise-addr="${name}:26357"             \
