@@ -11,9 +11,9 @@ docker network rm "${network}" &>/dev/null
 
 docker network create \
   --driver=bridge \
-  --subnet=22.0.0.0/16 \
-  --ip-range=22.0.0.0/30 \
-  --gateway=22.0.0.1 \
+  --subnet=21.0.0.0/16 \
+  --ip-range=21.0.0.0/30 \
+  --gateway=21.0.0.1 \
   "${network}" &>/dev/null
 
 # Run a containerized notByte Website
@@ -31,7 +31,7 @@ docker run \
   --detach \
   --restart always \
   --network "web" \
-  --ip 21.0.1.1 \
+  --ip 20.0.1.1 \
   --network "${network}" \
   --ip 21.0.0.2 \
   "${image}" &>/dev/null
