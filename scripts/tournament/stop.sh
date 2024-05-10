@@ -5,7 +5,7 @@ docker image prune --force &>/dev/null
 
 # Stop a containerized Tournament App
 
-network="tournament-net"
+network="tournament"
 name="tournament-app"
 
 docker network rm "${network}" &>/dev/null
