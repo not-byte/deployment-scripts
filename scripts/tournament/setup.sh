@@ -5,7 +5,7 @@ docker image prune --force &>/dev/null
 
 # Create a Internal Bridged Network
 
-network="tournament-net"
+network="tournament"
 
 docker network rm "${network}" &>/dev/null
 

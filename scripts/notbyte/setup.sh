@@ -3,9 +3,20 @@
 docker container prune --force &>/dev/null
 docker image prune --force &>/dev/null
 
-# Run a containerized notByte Website
+# Create a Internal Bridged Network
 
-network="bridge"
+network="notbyte"
+
+docker network rm "${network}" &>/dev/null
+
+docker network create \
+  --driver=bridge \
+  --subnet=21.0.0.0/16 \
+  --ip-range=21.0.0.0/30 \
+  --gateway=21.0.0.1 \
+  "${network}" &>/dev/null
+
+# Run a containerized notByte Website
 
 name="notbyte-website"
 image="ghcr.io/not-byte/${name}:latest"
@@ -20,5 +31,5 @@ docker run \
   --detach \
   --restart always \
   --network "${network}" \
-  --ip 172.168.0.3 \
+  --ip 21.0.0.2 \
   "${image}" &>/dev/null
