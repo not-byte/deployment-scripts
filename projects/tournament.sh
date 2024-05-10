@@ -30,7 +30,6 @@ docker rm "${name}" &>/dev/null
 
 docker run \
   --name "${name}" \
-  --restart always \
   --detach \
   --restart always \
   --network "${network}" \
@@ -58,7 +57,7 @@ for ((id=1; id<=3; id++)); do
   docker run \
     --name "${name}-${id}" \
     --detach \
-    --restart always  \
+    --restart always \
     --network "${network}" \
     --ip 20.0.0."$((id+1))" \
     "${image}" &>/dev/null
