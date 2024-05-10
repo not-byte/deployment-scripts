@@ -32,7 +32,7 @@ docker run \
   --detach \
   --restart always \
   --network "${network}" \
-  --ip 21.0.0.2 \
+  --ip 20.0.0.2 \
   --volume /etc/ssl:/etc/ssl \
   --volume conf.d:/etc/nginx/conf.d \
   --publish 0.0.0.0:"${ports[0]}":"${ports[0]}" \
