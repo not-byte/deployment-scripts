@@ -36,7 +36,7 @@ docker run \
   --network "${network}" \
   --ip 20.0.0.2 \
   --volume /etc/ssl:/etc/ssl \
-  --volume ./../"${name}"/conf.d:/etc/"${name}"/conf.d \
+  --volume ./../config/nginx/conf.d:/etc/nginx/conf.d \
   --publish 0.0.0.0:"${ports[0]}":"${ports[0]}" \
   --publish 0.0.0.0:"${ports[1]}":"${ports[1]}" \
   "${image}" &>/dev/null
@@ -45,6 +45,9 @@ docker run \
 
 image="ghcr.io/not-byte/tournament-app:latest"
 name="tournament_app"
+ports=(3000)
+
+source ../utils/port-check.sh "${ports[0]}"
 
 docker pull "${image}" &>/dev/null
 
