@@ -3,9 +3,9 @@
 docker container prune --force &>/dev/null
 docker image prune --force &>/dev/null
 
-# Stop a containerized notByte Website
+# Stop a containerized NGINX Webserver
 
-network="nginx"
+network="web"
 name="nginx"
 
 docker network rm "${network}" &>/dev/null

@@ -5,14 +5,14 @@ docker image prune --force &>/dev/null
 
 # Create a Internal Bridged Network
 
-network="nginx"
+network="web"
 
 docker network rm "${network}" &>/dev/null
 
 docker network create \
   --driver=bridge \
   --subnet=20.0.0.0/16 \
-  --ip-range=20.0.0.0/30 \
+  --ip-range=20.0.0.0/16 \
   --gateway=20.0.0.1 \
   "${network}" &>/dev/null
 

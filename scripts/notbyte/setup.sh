@@ -30,6 +30,8 @@ docker run \
   --name "${name}" \
   --detach \
   --restart always \
+  --network "web" \
+  --ip 21.0.1.1 \
   --network "${network}" \
-  --ip 22.0.0.2 \
+  --ip 21.0.0.2 \
   "${image}" &>/dev/null

@@ -11,9 +11,9 @@ docker network rm "${network}" &>/dev/null
 
 docker network create \
   --driver=bridge \
-  --subnet=21.0.0.0/16 \
-  --ip-range=21.0.0.0/24 \
-  --gateway=21.0.0.1 \
+  --subnet=22.0.0.0/16 \
+  --ip-range=22.0.0.0/29 \
+  --gateway=22.0.0.1 \
   "${network}" &>/dev/null
 
 # Run a containerized Tournament App
@@ -31,7 +31,9 @@ for ((id=1; id<=3; id++)); do
     --name "${name}-${id}" \
     --detach \
     --restart always \
+    --network "web" \
+    --ip 20.0.2."${id}" \
     --network "${network}" \
-    --ip 21.0.0."$((id+1))" \
+    --ip 22.0.0."$((id+1))" \
     "${image}" &>/dev/null
 done
