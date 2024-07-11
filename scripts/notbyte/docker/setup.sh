@@ -5,36 +5,40 @@ docker image prune --force &>/dev/null
 
 # Create a Internal Bridged Network
 
-network="notbyte"
+network="portainer"
 
 docker network rm "${network}" &>/dev/null
 
 docker network create \
   --driver=bridge \
-  --subnet=21.0.0.0/16 \
-  --ip-range=21.0.0.0/30 \
-  --gateway=21.0.0.1 \
+  --subnet=23.0.0.0/16 \
+  --ip-range=23.0.0.0/30 \
+  --gateway=23.0.0.1 \
   "${network}" &>/dev/null
 
-# Run a containerized notByte Website
+# Run a containerized Portainer Panel
 
-name="notbyte-website"
-image="ghcr.io/not-byte/${name}"
+name="portainer"
+image="portainer/portainer-ce"
 
 docker pull "${image}" &>/dev/null
 
 docker stop "${name}" &>/dev/null
 docker rm "${name}" &>/dev/null
 
+docker volume create "${name}_data" &>/dev/null
+
 docker run \
   --name "${name}" \
   --detach \
   --restart always \
   --network "web" \
-  --ip 20.0.1.1 \
+  --ip 20.0.3.1 \
+  --mount /var/run/docker.sock:/var/run/docker.sock \
+  --mount "${name}_data":/data
   "${image}" &>/dev/null
 
 docker network connect \
-  --ip 21.0.0.2 \
+  --ip 23.0.0.2 \
   "${network}" \
   "${name}" &>/dev/null
