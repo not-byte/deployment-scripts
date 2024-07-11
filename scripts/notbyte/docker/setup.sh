@@ -34,8 +34,8 @@ docker run \
   --restart always \
   --network "web" \
   --ip 20.0.3.1 \
-  --mount /var/run/docker.sock:/var/run/docker.sock \
-  --mount "${name}_data":/data
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  --volume "${name}_data":/data
   "${image}" &>/dev/null
 
 docker network connect \
