@@ -40,7 +40,7 @@ docker run \
   --volume "${name}":/data \
   --volume /etc/ssl:/etc/ssl \
   "${image}" &>/dev/null \
-  --sslcert /etf/ssl/certs/notbyte.com.pem \
+  --sslcert /etc/ssl/certs/notbyte.com.pem \
   --sslkey /etc/ssl/private/notbyte.com.pem
 
 docker network connect \
