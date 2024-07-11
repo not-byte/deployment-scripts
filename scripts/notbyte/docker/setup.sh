@@ -26,7 +26,7 @@ docker pull "${image}" &>/dev/null
 docker stop "${name}" &>/dev/null
 docker rm "${name}" &>/dev/null
 
-docker volume remove "${name}"
+docker volume remove "${name}" &>/dev/null
 
 docker volume create "${name}" &>/dev/null
 
@@ -38,6 +38,7 @@ docker run \
   --ip 20.0.3.1 \
   --volume /var/run/docker.sock:/var/run/docker.sock \
   --volume "${name}":/data \
+  --volume /etc/ssl:/etc/ssl \
   "${image}" &>/dev/null \
   --sslcert /etf/ssl/certs/notbyte.com.pem \
   --sslkey /etc/ssl/private/notbyte.com.pem
