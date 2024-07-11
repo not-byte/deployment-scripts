@@ -26,7 +26,9 @@ docker pull "${image}" &>/dev/null
 docker stop "${name}" &>/dev/null
 docker rm "${name}" &>/dev/null
 
-docker volume create "${name}_data" &>/dev/null
+docker volume remove "${name}"
+
+docker volume create "${name}" &>/dev/null
 
 docker run \
   --name "${name}" \
@@ -35,8 +37,10 @@ docker run \
   --network "web" \
   --ip 20.0.3.1 \
   --volume /var/run/docker.sock:/var/run/docker.sock \
-  --volume "${name}_data":/data \
-  "${image}" &>/dev/null
+  --volume "${name}":/data \
+  "${image}" &>/dev/null \
+  --sslcert /etf/ssl/certs/notbyte.com.pem \
+  --sslkey /etc/ssl/private/notbyte.com.pem
 
 docker network connect \
   --ip 23.0.0.2 \
