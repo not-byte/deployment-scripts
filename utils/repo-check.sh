@@ -4,7 +4,7 @@
 
 repository="deployment-scripts"
 
-git status --porcelain
+git status --uno
 
 cd ~/"${repository}" || exit 1
 
