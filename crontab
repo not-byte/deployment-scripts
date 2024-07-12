@@ -1,1 +1,1 @@
-* * * * * /bin/bash ~/deployment-scripts/utils/repo-check.sh >> ~/deployment-scripts.log
+* * * * * /bin/bash ~/deployment-scripts/utils/repo-check.sh > ~/deployment-scripts.log
