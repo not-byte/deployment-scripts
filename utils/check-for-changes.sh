@@ -3,15 +3,15 @@
 # Check GitHub repository for updates
 
 repository="deployment-scripts"
-hasChanged="false"
+changed="false"
 
 cd ~/"${repository}" || exit 1
 
 git fetch
 
-git status -uno | grep -q "behind" && hasChanged="true"
+git status -uno | grep -q "up to date" && changed="true"
 
-if [ "${hasChanged}" ];
+if [ "${changed}" ];
 then
   git pull &>/dev/null
 

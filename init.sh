@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./utils/repo-check.sh
+source check-changes.sh
 
 # Install necessery packages and setup
 
