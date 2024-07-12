@@ -1,17 +1,15 @@
 #!/bin/bash
 
-# Check GitHub repository for updates
+# Check for updates in GitHub repository
 
 repository="deployment-scripts"
 changed=false
 
 cd ~/"${repository}" || exit 1
 
-git fetch
+git fetch &>/dev/null
 
 git status -uno | grep -q "behind" && changed=true
-
-echo "${changed}"
 
 if [ $changed = true ];
 then
