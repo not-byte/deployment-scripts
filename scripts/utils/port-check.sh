@@ -12,8 +12,8 @@ do
   then
     echo "> Port ${port} is used!"
   else
-    sudo firewall-cmd          \
-      --permanent              \
+    sudo firewall-cmd \
+      --permanent \
       --add-port="${port}/tcp" \
       &>/dev/null
   fi

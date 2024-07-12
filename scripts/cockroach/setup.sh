@@ -32,22 +32,22 @@ docker rm "${controller}" &>/dev/null
 
 docker volume create "${controller}" &>/dev/null
 
-docker run                                           \
-  --detach                                           \
-  --name "${controller}"                             \
-  --restart always                                   \
-  --hostname "${controller}"                         \
-  --net "${subnet}"                                  \
-  --publish "60008:8081"                            \
-  --publish "60009:26257"                            \
+docker run \
+  --detach \
+  --name "${controller}" \
+  --restart always \
+  --hostname "${controller}" \
+  --net "${subnet}" \
+  --publish "60008:8081" \
+  --publish "60009:26257" \
   --volume "${controller}:/cockroach/cockroach-data" \
-  "$image"                                           \
-  start                                              \
-  --advertise-addr="${controller}:26357"             \
-  --http-addr="${controller}:8081"                  \
-  --listen-addr="${controller}:26357"                \
-  --sql-addr="${controller}:26257"                   \
-  --join="${joined}"                                 \
+  "$image" \
+  start \
+  --advertise-addr="${controller}:26357" \
+  --http-addr="${controller}:8081" \
+  --listen-addr="${controller}:26357" \
+  --sql-addr="${controller}:26257" \
+  --join="${joined}" \
   --insecure &>/dev/null
 
 for ((roach=2; roach<=clusters; roach++)); do
@@ -59,24 +59,24 @@ for ((roach=2; roach<=clusters; roach++)); do
 
   docker volume create "${name}" &>/dev/null
 
-  docker run                                     \
-    --name "${name}"                             \
-    --detach                                     \
-    --restart always                             \
-    --hostname "${subnet}-${roach}"              \
-    --net "${subnet}"                            \
+  docker run \
+    --name "${name}" \
+    --detach \
+    --restart always \
+    --hostname "${subnet}-${roach}" \
+    --net "${subnet}" \
     --volume "${name}:/cockroach/cockroach-data" \
-    "$image"                                     \
-    start                                        \
-    --advertise-addr="${name}:26357"             \
-    --listen-addr="${name}:26357"                \
-    --sql-addr="${name}:${sql}"                  \
-    --join="${joined}"                           \
+    "$image" \
+    start \
+    --advertise-addr="${name}:26357" \
+    --listen-addr="${name}:26357" \
+    --sql-addr="${name}:${sql}" \
+    --join="${joined}" \
     --insecure &>/dev/null
 done
 
-docker exec                           \
-  -it "${controller}" ./cockroach     \
+docker exec \
+  -it "${controller}" ./cockroach \
   --host="${controller}:26357" \
-  init                                \
+  init \
   --insecure

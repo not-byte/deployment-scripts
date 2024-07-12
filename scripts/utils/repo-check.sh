@@ -2,6 +2,10 @@
 
 # Check GitHub repository for updates
 
-cd ~/deployment-scripts || exit 1
+repository="deployment-scripts"
 
-gh repo sync &>/dev/null
+cd ~/"${repository}" || exit 1
+
+git pull &>/dev/null
+
+echo "[$(date '+%Y-%m-%d %H:%M:%S')]: Repository ${repository} updated successfully."
