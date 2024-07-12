@@ -2,7 +2,7 @@
 
 source check-changes.sh
 
-# Install necessery packages and setup
+# Install necessary packages and setup
 
 username="$USER"
 

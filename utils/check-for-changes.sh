@@ -11,6 +11,8 @@ git fetch
 
 git status -uno | grep -q "up to date" && changed="true"
 
+echo "${changed}"
+
 if [ "${changed}" ];
 then
   git pull &>/dev/null
