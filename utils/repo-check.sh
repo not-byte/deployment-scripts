@@ -4,6 +4,8 @@
 
 repository="deployment-scripts"
 
+git status --porcelain
+
 cd ~/"${repository}" || exit 1
 
 git pull &>/dev/null
