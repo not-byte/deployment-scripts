@@ -19,6 +19,6 @@ then
 
   message="[$(date '+%Y-%m-%d %H:%M:%S')]: Repository ${repository} updated successfully."
 
-  write "${message}"
+  wall "${message}"
   echo "${message}"
 fi
