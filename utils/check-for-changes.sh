@@ -9,7 +9,7 @@ cd ~/"${repository}" || exit 1
 
 git fetch
 
-git status -uno | grep -q "up to date" && changed="true"
+git status -uno | grep -q "behind" && changed="true"
 
 echo "${changed}"
 
@@ -21,6 +21,5 @@ then
 
   message="[$(date '+%Y-%m-%d %H:%M:%S')]: Repository ${repository} updated successfully."
 
-  wall "${message}"
   echo "${message}"
 fi
