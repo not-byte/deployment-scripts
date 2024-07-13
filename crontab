@@ -1,1 +1,1 @@
-* * * * * /bin/bash ~/deployment-scripts/utils/update-repository.sh > /var/log/deployment-scripts.log
+* * * * * /bin/bash ~/deployment-scripts/utils/update-repository.sh
