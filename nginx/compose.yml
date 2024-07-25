@@ -1,8 +1,12 @@
 services:
+  notbyte:
+    container_name: "notbyte"
+    image: "ghcr.io/not-byte/notbyte-website"
+    restart: unless-stopped
   web:
     container_name: "web"
     image: "nginx"
-    restart: always
+    restart: unless-stopped
     ports:
       - "0.0.0.0:80:80"
       - "0.0.0.0:443:443"
@@ -11,12 +15,6 @@ services:
       - "./conf.d:/etc/nginx/conf.d"
     links:
       - notbyte
-  notbyte:
-    container_name: "notbyte"
-    image: "ghcr.io/not-byte/notbyte-website"
-    restart: always
-    depends_on:
-      - web
 
 networks:
   default:
