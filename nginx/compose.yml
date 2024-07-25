@@ -1,5 +1,5 @@
 services:
-  nginx:
+  web:
     container_name: "web"
     image: "nginx"
     restart: always
