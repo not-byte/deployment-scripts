@@ -3,6 +3,9 @@ services:
     container_name: "notbyte"
     image: "ghcr.io/not-byte/notbyte-website"
     restart: unless-stopped
+    networks:
+      - bridge
+      - web
   web:
     container_name: "web"
     image: "nginx"
@@ -16,12 +19,17 @@ services:
       - "./nginx/conf.d:/etc/nginx/conf.d"
     links:
       - notbyte
+    networks:
+      - web
 
 networks:
-  default:
+  web:
     name: web
     ipam:
       config:
         - subnet: 10.0.0.0/16
           ip_range: 10.0.0.0/16
           gateway: 10.0.0.1
+  bridge:
+    name: bridge
+    external: true
