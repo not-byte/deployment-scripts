@@ -53,6 +53,7 @@ services:
       - api
       - worker
     networks:
+      - plane
       - web
 
   space:
