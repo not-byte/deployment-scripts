@@ -5,7 +5,7 @@
 repository="deployment-scripts"
 changed=false
 
-cd ~/"${repository}" || exit 1
+cd ~/"${repository}/utils" || exit 1
 
 git fetch &>/dev/null
 

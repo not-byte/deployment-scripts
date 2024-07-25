@@ -1,6 +1,8 @@
 # deployment-scripts
 This repository contains our deployment scripts for a Linux system
 
+Deprecated README.md
+
 Download script
 
 ```bash
