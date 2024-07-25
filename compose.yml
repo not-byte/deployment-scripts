@@ -17,11 +17,11 @@ services:
     links:
       - notbyte
 
-#networks:
-#  web:
-#    name: web
-#    ipam:
-#      config:
-#        - subnet: 10.0.0.0/16
-#          ip_range: 10.0.0.0/16
-#          gateway: 10.0.0.1
+networks:
+  default:
+    name: web
+    ipam:
+      config:
+        - subnet: 10.0.0.0/27
+          ip_range: 10.0.0.0/27
+          gateway: 10.0.0.1
