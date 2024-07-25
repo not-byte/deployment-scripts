@@ -1,5 +1,6 @@
 services:
   nginx:
+    container_name: web
     image: "nginx"
     restart: always
     ports:
