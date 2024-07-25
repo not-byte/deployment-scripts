@@ -44,6 +44,8 @@ services:
     <<: *app-env
     image: ${DOCKERHUB_USER:-makeplane}/plane-frontend:${APP_RELEASE:-stable}
     platform: ${DOCKER_PLATFORM:-}
+    ports:
+      - "3000:3000"
     pull_policy: ${PULL_POLICY:-always}
     restart: unless-stopped
     command: node web/server.js web
@@ -52,9 +54,6 @@ services:
     depends_on:
       - api
       - worker
-    networks:
-      - default
-      - web
 
   space:
     <<: *app-env
@@ -177,6 +176,3 @@ volumes:
 networks:
   default:
     name: plane
-  web:
-    name: web
-    external: true
