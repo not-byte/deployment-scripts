@@ -1,0 +1,23 @@
+services:
+  nginx:
+    image: "nginx"
+    restart: always
+    ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+    volumes:
+      - type: volume
+        source: "/etc/ssl"
+        target: "/etc/ssl"
+      - type: volume
+        source: "./nginx/nginx"
+        target: "/etc/nginx"
+
+networks:
+  default:
+    name: web
+    ipam:
+      config:
+        - subnet: 10.0.0.0/16
+          ip_range: 10.0.0.0/16
+          gateway: 10.0.0.1

@@ -32,7 +32,6 @@ docker run \
   --detach \
   --restart always \
   --network "${network}" \
-  --ip 20.0.0.2 \
   --volume /etc/ssl:/etc/ssl \
   --volume ./nginx/nginx:/etc/nginx \
   --publish 0.0.0.0:"${ports[0]}":"${ports[0]}" \
