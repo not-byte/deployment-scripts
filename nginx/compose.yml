@@ -1,6 +1,6 @@
 services:
   nginx:
-    container_name: web
+    container_name: "web"
     image: "nginx"
     restart: always
     ports:
@@ -9,6 +9,12 @@ services:
     volumes:
       - "/etc/ssl:/etc/ssl"
       - "./nginx/conf.d:/etc/nginx/conf.d"
+    links:
+      - notbyte
+  notbyte:
+    container_name: "notbyte"
+    image: "ghcr.io/not-byte/notbyte-website"
+    restart: always
 
 networks:
   default:
