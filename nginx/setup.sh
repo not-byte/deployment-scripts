@@ -34,7 +34,7 @@ docker run \
   --network "${network}" \
   --ip 20.0.0.2 \
   --volume /etc/ssl:/etc/ssl \
-  --volume ./nginx/conf.d:/etc/nginx/conf.d \
+  --volume ./nginx/nginx:/etc/nginx \
   --publish 0.0.0.0:"${ports[0]}":"${ports[0]}" \
   --publish 0.0.0.0:"${ports[1]}":"${ports[1]}" \
   "${image}" &>/dev/null
