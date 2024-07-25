@@ -40,6 +40,7 @@ x-app-env: &app-env
 
 services:
   web:
+    container_name: plane
     <<: *app-env
     image: ${DOCKERHUB_USER:-makeplane}/plane-frontend:${APP_RELEASE:-stable}
     platform: ${DOCKER_PLATFORM:-}
