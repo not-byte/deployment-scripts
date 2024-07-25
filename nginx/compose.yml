@@ -15,6 +15,8 @@ services:
     container_name: "notbyte"
     image: "ghcr.io/not-byte/notbyte-website"
     restart: always
+    depends_on:
+      - web
 
 networks:
   default:
